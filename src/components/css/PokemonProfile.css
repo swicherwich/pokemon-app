@@ -1,0 +1,71 @@
+.pokemon-profile-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+.pokemon-profile-container h1 {
+  font-size: 1.8em;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.pokemon-name {
+  text-transform: capitalize;
+  font-size: 1.5em;
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+/* This container centers image + button */
+.image-and-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Centered & styled Pokemon image */
+.pokemon-image {
+  width: 250px;
+  height: auto;
+  margin-bottom: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Centered & styled audio button */
+.pokemon-audio-button {
+  padding: 0.75rem 1.2rem;
+  background: #48bb78; /* green color */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.2s ease;
+  font-size: 1em;
+}
+
+.pokemon-audio-button:hover {
+  background: #38a169; /* darker green on hover */
+}
+
+/* Back link styling */
+.back-link {
+  display: inline-block;
+  text-decoration: none;
+  color: #3182ce;
+  margin-top: 1rem;
+  font-size: 0.95em;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #2b6cb0;
+}

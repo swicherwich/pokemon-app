@@ -1,0 +1,59 @@
+.pokemon-list-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  text-align: center;
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-list-container h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2em;
+  color: #333;
+}
+
+.pokemon-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.pokemon-item {
+  background: #fff;
+  width: 180px;
+  padding: 1rem;
+  border-radius: 8px;
+  text-transform: capitalize; /* Makes "pikachu" -> "Pikachu" visually */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.pokemon-item:hover {
+  transform: scale(1.03);
+}
+
+.pokemon-item h2 {
+  margin: 0.5rem 0;
+  font-size: 1.2em;
+  color: #444;
+}
+
+.pokemon-item nav a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  background: #3182ce;
+  color: #fff;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.pokemon-item nav a:hover {
+  background: #2b6cb0;
+}
