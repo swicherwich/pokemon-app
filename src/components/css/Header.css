@@ -1,0 +1,28 @@
+.header-container {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* Appearance */
+  background-color: #f8fafc;  /* Light grayish background */
+  padding: 1rem 2rem;        /* Spacing around content */
+  border-bottom: 2px solid #ddd;
+}
+
+.header-left,
+.header-center,
+.header-right {
+  /* Minimal styling—customize as desired */
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* Example: If you want the center item strictly in the middle,
+   while left/right are narrower, you could do something like:
+   .header-center {
+     flex: 1;
+     text-align: center;
+   }
+   This ensures the center has the most space and text is centered.
+*/

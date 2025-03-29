@@ -40,7 +40,7 @@ export default function PokemonProfile() {
       <h2 className="pokemon-name">{pokemon.name}</h2>
 
       <div className="image-and-button">
-        <p>$ {getRandomInt(10, 100)}.{getRandomInt(10, 100)}</p>
+        <p>$ {getRandomInt(10, 100)}.{getRandomInt(10, 99)}</p>
         {pokemon.id && (
           <img
             className="pokemon-image"
