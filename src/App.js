@@ -5,7 +5,7 @@ import PokemonProfile from "./components/PokemonProfile";
 
 function App() {
   return (
-    <HashRouter basename="/pokemon-app">
+    <HashRouter>
       <Routes>
         <Route path={"/"} element={<PokemonList/>}/>
         <Route path={"/pokemon/:name"} element={<PokemonProfile/>}/>
