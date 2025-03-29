@@ -15,7 +15,7 @@ export default function PokemonProfile() {
       setPokemon(data);
     };
     fetchPokemonData();
-  }, []);
+  }, [name]);
 
   const playAudio = () => {
     if (audioRef.current) {
@@ -23,12 +23,24 @@ export default function PokemonProfile() {
     }
   }
 
+  function getRandomInt(min, max) {
+    // Ensure min and max are integers (if needed, you can also do Math.ceil(min), etc.)
+    min = Math.ceil(min);
+    max = Math.floor(max);
+
+    // Math.random() returns a floating-point number in the range [0, 1).
+    // Multiplying by (max - min + 1) gives a range [0, max - min + 1),
+    // and adding min shifts it into [min, max+1).
+    // Finally, Math.floor truncates to an integer.
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   return (
     <div className="pokemon-profile-container">
-      <h1>Pokemon {name}'s Profile</h1>
       <h2 className="pokemon-name">{pokemon.name}</h2>
 
       <div className="image-and-button">
+        <p>$ {getRandomInt(10, 100)}.{getRandomInt(10, 100)}</p>
         {pokemon.id && (
           <img
             className="pokemon-image"
