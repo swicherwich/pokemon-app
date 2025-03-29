@@ -15,7 +15,7 @@ export default function PokemonProfile() {
       setPokemon(data);
     };
     fetchPokemonData();
-  }, [name]);
+  }, []);
 
   const playAudio = () => {
     if (audioRef.current) {

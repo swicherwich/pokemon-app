@@ -13,7 +13,7 @@ export default function PokemonList() {
       setPokemons(data.results);
     };
     fetchPokemons();
-  }, [pokemons]);
+  }, []);
 
   return (
     <div className="pokemon-list-container">

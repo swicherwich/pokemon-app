@@ -1,16 +1,16 @@
 import './App.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import PokemonList from "./components/PokemonList";
 import PokemonProfile from "./components/PokemonProfile";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter basename="/pokemon-app">
       <Routes>
         <Route path={"/"} element={<PokemonList/>}/>
         <Route path={"/pokemon/:name"} element={<PokemonProfile/>}/>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
