@@ -1,6 +1,7 @@
 // src/App.js
-import React, { useState, useEffect } from 'react';
-import { auth } from './firebase';
+import React, {useState, useEffect} from 'react';
+import { db, auth } from './firebase';
+import {doc, setDoc} from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -19,17 +20,24 @@ function LoginPage() {
 
   // Subscribe to authentication state changes
   useEffect(() => {
+
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   // Handle user registration
   const handleRegister = async () => {
     setError('');
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const creds = await createUserWithEmailAndPassword(auth, email, password);
+      await setDoc(doc(db, "users", creds.user.uid), {
+        id: creds.user.uid,
+        email: creds.user.email,
+        pokemons: []
+      });
+      navigate('/user');
     } catch (err) {
       setError(err.message);
     }
