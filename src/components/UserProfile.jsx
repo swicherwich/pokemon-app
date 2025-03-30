@@ -1,13 +1,13 @@
 // UserProfile.jsx
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db, auth } from './firebase';
 import { Link } from 'react-router-dom';
 import './css/UserProfile.css';
 import {onAuthStateChanged} from "firebase/auth";
 
 export default function UserProfile() {
-  const [items, setItems] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -19,15 +19,12 @@ export default function UserProfile() {
 
   useEffect(() => {
     async function fetchData() {
+      if (!user || !user.uid) return;
+      console.log(user.uid);
       try {
-        const querySnapshot = await getDocs(collection(db, "pokemons"));
-        const fetchedItems = [];
-        querySnapshot.forEach((doc) => {
-          if (doc.data().user === user.uid) {
-            fetchedItems.push({ id: doc.id, ...doc.data() });
-          }
-        });
-        setItems(fetchedItems);
+        const querySnapshot = await getDoc(doc(db, "users", user.uid));
+        console.log(querySnapshot.data());
+        setPokemons(querySnapshot.data().pokemons);
       } catch (error) {
         console.error("Error fetching documents: ", error);
       }
@@ -38,10 +35,10 @@ export default function UserProfile() {
   return (
     <div className="user-profile-container">
       <h2>Pokemon Collection</h2>
-      {items.map((item) => (
-        <div key={item.id} className="user-profile-item">
-          <Link className="user-profile-link" to={`/pokemon/${item.name}`}>
-            {item.name}
+      {pokemons.map((pokemon) => (
+        <div key={pokemon.id} className="user-profile-item">
+          <Link className="user-profile-link" to={`/pokemon/${pokemon.name}`}>
+            {pokemon.name}
           </Link>
         </div>
       ))}

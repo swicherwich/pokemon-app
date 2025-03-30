@@ -1,7 +1,7 @@
 import {Link, useParams} from "react-router-dom";
 import {useEffect, useRef, useState} from "react";
 import axios from "axios";
-import {collection, addDoc, getDocs} from 'firebase/firestore';
+import {updateDoc, arrayUnion, getDoc, doc} from 'firebase/firestore';
 import { db, auth } from './firebase';
 import './css/PokemonProfile.css';
 import {onAuthStateChanged} from "firebase/auth";
@@ -29,38 +29,38 @@ export default function PokemonProfile() {
     fetchPokemonData();
   }, [name]);
 
+  useEffect(() => {
+    async function fetchData() {
+      if (!user || !user.uid) return;
+      try {
+        const querySnapshot = await getDoc(doc(db, "users", user.uid));
+        querySnapshot.data().pokemons.forEach(pokemonDoc => {
+          if (pokemonDoc.name === pokemon.name) {
+            setIsAdded(true);
+          }
+        })
+      } catch (error) {
+        console.error("Error fetching documents: ", error);
+      }
+    }
+    fetchData();
+  }, [user, pokemon.name])
+
   const playAudio = () => {
     if (audioRef.current) {
       audioRef.current.play();
     }
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const querySnapshot = await getDocs(collection(db, "pokemons"));
-        querySnapshot.forEach((doc) => {
-          if (doc.data().userEmail === user.email && pokemon.name === doc.data().name) {
-            setIsAdded(true);
-          }
-        });
-      } catch (error) {
-        console.error("Error fetching documents: ", error);
-      }
-    }
-    fetchData();
-  })
-
   const addPokemon = async () => {
     try {
-      const docRef = await addDoc(collection(db, 'pokemons'), {
-        name: pokemon.name,
-        id: pokemon.id,
-        user: user.uid,
-        userEmail: user.email,
+      await updateDoc(doc(db, "users", user.uid), {
+        pokemons: arrayUnion({
+          name: pokemon.name,
+          id: pokemon.id,
+        })
       });
       setIsAdded(true);
-      console.log('Document written with ID: ', docRef.id);
     } catch (error) {
       console.error('Error adding document: ', error);
     }
