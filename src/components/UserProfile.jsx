@@ -1,12 +1,21 @@
 // UserProfile.jsx
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from './firebase';
+import { db, auth } from './firebase';
 import { Link } from 'react-router-dom';
 import './css/UserProfile.css';
+import {onAuthStateChanged} from "firebase/auth";
 
 export default function UserProfile() {
   const [items, setItems] = useState([]);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -14,7 +23,9 @@ export default function UserProfile() {
         const querySnapshot = await getDocs(collection(db, "pokemons"));
         const fetchedItems = [];
         querySnapshot.forEach((doc) => {
-          fetchedItems.push({ id: doc.id, ...doc.data() });
+          if (doc.data().user === user.uid) {
+            fetchedItems.push({ id: doc.id, ...doc.data() });
+          }
         });
         setItems(fetchedItems);
       } catch (error) {
@@ -22,7 +33,7 @@ export default function UserProfile() {
       }
     }
     fetchData();
-  }, []);
+  }, [user]);
 
   return (
     <div className="user-profile-container">
