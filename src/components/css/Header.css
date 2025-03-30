@@ -1,3 +1,5 @@
+/* Header.css */
+
 .header-container {
   /* Layout */
   display: flex;
@@ -6,23 +8,71 @@
 
   /* Appearance */
   background-color: #f8fafc;  /* Light grayish background */
-  padding: 1rem 2rem;        /* Spacing around content */
+  padding: 1rem 2rem;         /* Spacing around content */
   border-bottom: 2px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header-left,
 .header-center,
 .header-right {
-  /* Minimal styling—customize as desired */
+  /* Basic text styling */
   font-size: 1.1rem;
   font-weight: 500;
 }
 
-/* Example: If you want the center item strictly in the middle,
-   while left/right are narrower, you could do something like:
-   .header-center {
-     flex: 1;
-     text-align: center;
-   }
-   This ensures the center has the most space and text is centered.
-*/
+/* Ensure the center content is truly centered */
+.header-center {
+  flex: 1;
+  text-align: center;
+}
+
+/* Style for links in header-left and header-right */
+.header-left a,
+.header-right a {
+  text-decoration: none;
+  color: #333;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effect for links */
+.header-left a:hover,
+.header-right a:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 4px;
+}
+
+/* Styling the Sign Out button */
+.header-right button {
+  border: none;
+  background: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+/* Hover effect for the Sign Out button */
+.header-right button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header-center {
+    margin: 0.5rem 0;
+    text-align: left;
+  }
+  .header-right {
+    margin-top: 0.5rem;
+  }
+}
